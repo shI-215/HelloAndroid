@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'//应用程序模块
+//apply plugin: 'com.android.library'//库模块
+//应用程序模块可以直接运行，库模块需要依赖应用程序模块才能运行
+
+android {
+    compileSdkVersion 29  //指定编译SDK版本
+    buildToolsVersion "29.0.3"  //项目构建工具版本
+
+//    defaultConfig闭包
+    defaultConfig {
+        applicationId "com.tcom.helloandroid"  //指定项目包名
+        minSdkVersion 16  //最低兼容的Android版本
+        targetSdkVersion 29  //目标Android版本（指定成23或者更高版本时，程序将启用运行时权限功能）
+        versionCode 1  //项目版本号
+        versionName "1.0"  //项目版本名
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+//    buildTypes闭包——指定生成安装文件的配置（一般有debug和release两个子闭包，debug闭包可忽略不写）
+    buildTypes {
+        release {
+            minifyEnabled false  //指定是否对代码混淆
+            //proguard-android-optimize.txt在Android SDK目录下，通用的混淆规则；
+            // proguard-rules.pro在项目的根目录下，用于编写混淆规则
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+//dependencies闭包，指定项目的所有的依赖（包括本地依赖、库依赖和远程依赖）
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])  //本地依赖声明（表示将libs目录下的所有.jar文件添加到项目中）
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
