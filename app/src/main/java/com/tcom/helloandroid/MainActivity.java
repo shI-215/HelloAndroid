@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button add;
     private Button delete;
     private Button flush;
+    private Button next_page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add = (Button) findViewById(R.id.add);
         delete = (Button) findViewById(R.id.delete);
         flush = (Button) findViewById(R.id.flush);
+        next_page = (Button) findViewById(R.id.next_page);
 
         btn_web.setOnClickListener(this);
         btn_phone.setOnClickListener(this);
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add.setOnClickListener(this);
         delete.setOnClickListener(this);
         flush.setOnClickListener(this);
+        next_page.setOnClickListener(this);
     }
 
     @Override
@@ -130,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 progressDialog.setMessage("加载中。。。");
                 progressDialog.setCancelable(true);
                 progressDialog.show();
+                break;
+            case R.id.next_page:
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
                 break;
         }
     }
